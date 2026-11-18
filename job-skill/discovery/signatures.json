@@ -1,0 +1,55 @@
+{
+  "description": "High-signal dual-stack search queries to uncover low-competition, high-fit engineering roles across India and Remote.",
+  "signatures": [
+    {
+      "id": "spatial_data_engineering",
+      "name": "Spatial Data Engineering & ETL",
+      "keywords": ["GDAL", "Airflow", "Python"],
+      "target_roles": ["Spatial Data Engineer", "Geospatial Data Engineer", "Data Pipeline Engineer", "Python ETL Developer"],
+      "google_jobs_query": "\"GDAL\" \"Airflow\" \"Python\" (Hyderabad OR Bengaluru OR Pune OR Remote)",
+      "linkedin_query": "(\"GDAL\" OR \"GeoPandas\") AND \"Airflow\" AND \"Python\"",
+      "naukri_skills": ["GDAL", "Airflow", "Python", "ETL"],
+      "value_proposition": "Rare combination of distributed ETL pipeline orchestration (Airflow) and low-level spatial translation/raster libraries (GDAL)."
+    },
+    {
+      "id": "spatial_database_engineering",
+      "name": "Spatial Database & Query Optimization",
+      "keywords": ["PostGIS", "PostgreSQL", "Airflow"],
+      "target_roles": ["Database Engineer", "PostgreSQL Developer", "Data Platform Engineer", "Geodatabase Engineer"],
+      "google_jobs_query": "\"PostGIS\" \"PostgreSQL\" \"Airflow\" India",
+      "linkedin_query": "\"PostGIS\" AND \"PostgreSQL\" AND (\"Airflow\" OR \"ETL\")",
+      "naukri_skills": ["PostGIS", "PostgreSQL", "Airflow", "Query Optimization"],
+      "value_proposition": "Deep relational database internals, GiST/B-tree spatial indexing, and automated batch ingestion pipelines."
+    },
+    {
+      "id": "api_iam_integration",
+      "name": "Backend API & Enterprise IAM Integration",
+      "keywords": ["FastAPI", "Keycloak", "OAuth2", "Python"],
+      "target_roles": ["Backend Developer", "Python Integration Engineer", "API Engineer", "SDE Backend"],
+      "google_jobs_query": "\"FastAPI\" (\"Keycloak\" OR \"OAuth2\" OR \"OIDC\") \"Python\" India",
+      "linkedin_query": "\"FastAPI\" AND (\"Keycloak\" OR \"OAuth2\" OR \"OpenFGA\") AND \"Python\"",
+      "naukri_skills": ["FastAPI", "Python", "OAuth2", "Keycloak", "Docker"],
+      "value_proposition": "Production microservice backend integration with enterprise authentication/authorization (Keycloak, APISIX gateway, OpenFGA)."
+    },
+    {
+      "id": "database_reliability_sre",
+      "name": "Database Infrastructure & Reliability (SRE)",
+      "keywords": ["PostgreSQL", "pgBackRest", "Linux", "PITR"],
+      "target_roles": ["Software Reliability Engineer", "Database Administrator", "Site Reliability Engineer", "Systems Engineer"],
+      "google_jobs_query": "\"PostgreSQL\" (\"pgBackRest\" OR \"PITR\" OR \"disaster recovery\") \"Linux\" India",
+      "linkedin_query": "\"PostgreSQL\" AND (\"pgBackRest\" OR \"point-in-time recovery\") AND \"Linux\"",
+      "naukri_skills": ["PostgreSQL", "Linux", "Backup and Recovery", "pgBackRest", "Database Administration"],
+      "value_proposition": "Zero-downtime database maintenance, Point-in-Time Recovery with Cloudflare R2, and multi-node clustering."
+    },
+    {
+      "id": "spatial_infrastructure_platform",
+      "name": "Spatial Platform Infrastructure & Services",
+      "keywords": ["GeoServer", "PostGIS", "Docker", "Martin"],
+      "target_roles": ["GIS Platform Engineer", "Geospatial Software Engineer", "Product Engineer"],
+      "google_jobs_query": "(\"GeoServer\" OR \"Martin\") \"PostGIS\" \"Docker\" India",
+      "linkedin_query": "(\"GeoServer\" OR \"vector tiles\") AND \"PostGIS\" AND \"Docker\"",
+      "naukri_skills": ["GeoServer", "PostGIS", "Docker", "Python", "Vector Tiles"],
+      "value_proposition": "High-throughput vector tile serving, 2-node cluster deployment with automated failover, and OGC web services."
+    }
+  ]
+}

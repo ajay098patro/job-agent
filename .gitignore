@@ -5,11 +5,15 @@
 # --- Playwright & Browser Automation Artifacts ---
 _pw-output/
 .playwright-mcp/
+.playwright/
 test-results/
 playwright-report/
 blob-report/
+playwright-trace/
 playwright/.cache/
 PlaywrightProfile/
+storage-state.json
+*.cookies
 
 # --- Node.js & Dependencies ---
 node_modules/
@@ -30,6 +34,8 @@ venv/
 .venv/
 ENV/
 .pytest_cache/
+.mypy_cache/
+.ruff_cache/
 
 # --- Scratch, Backups & Temporary Files ---
 scratch/
@@ -37,10 +43,14 @@ tmp/
 temp/
 *.tmp
 *.bak
+*.bak[0-9]*
 *.backup
+*.orig
 *.swp
 *.swo
+*.kate-swp
 *~
+nohup.out
 *_live_test.txt
 mission_*.txt
 test_*.txt
@@ -50,24 +60,49 @@ test_*.txt
 *.sqlite3
 *.sqlite-wal
 *.sqlite-shm
+*.sqlite-journal
+*.sqlite3-journal
 *.db
+*.db-wal
+*.db-shm
 *.db-journal
 session.json
 **/data/session.json
+!**/data/.gitkeep
 
 # --- LaTeX & Resume Compilation Intermediate Files ---
 *.aux
 *.fls
 *.fdb_latexmk
 *.synctex.gz
+*.synctex(busy)
+*.pdfsync
 *.toc
 *.lot
 *.lof
 *.out
 *.log
-cv/out/
-career-ops/out/
-job-skill/cv/out/
+*.dvi
+*.xdv
+*.bbl
+*.blg
+*.bcf
+*.run.xml
+*.nav
+*.snm
+*.vrb
+*.idx
+*.ind
+*.ilg
+*.glo
+*.gls
+*.glg
+**/cv/out/*
+!**/cv/out/.gitkeep
+**/cv/variants/*.pdf
+!**/cv/variants/.gitkeep
+**/cv/variants/temp_*/
+**/cv/out/temp_*/
 
 # --- Environment Variables, Secrets & Local Overrides ---
 .env
@@ -79,12 +114,24 @@ job-skill/cv/out/
 credentials.json
 token.json
 profile.local.json
+mcp_config.json
+mcp_config.local.json
+.mcp.json
+.codex/
 
 # --- Operating System & IDE Files ---
+# macOS
 .DS_Store
+# Windows
 Thumbs.db
 ehthumbs.db
 desktop.ini
+*:Zone.Identifier
+# Linux / KDE / Freedesktop / NFS
+.directory
+.Trash-*
+.nfs*
+# IDEs & Editors
 .vscode/
 .idea/
 *.sublime-project

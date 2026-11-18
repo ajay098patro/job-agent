@@ -1,0 +1,17 @@
+# Normalize line endings across Windows and Linux
+* text=auto eol=lf
+
+# Shell scripts must stay LF even on Windows
+*.sh text eol=lf
+
+# Windows batch and PowerShell scripts
+*.bat text eol=crlf
+*.cmd text eol=crlf
+*.ps1 text eol=crlf
+
+# Binary files
+*.pdf binary
+*.png binary
+*.sqlite binary
+*.sqlite3 binary
+*.db binary

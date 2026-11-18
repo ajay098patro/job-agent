@@ -2,85 +2,70 @@
 
 Autonomous multi-platform job application and recruitment outreach pipeline tailored for Data Engineering, Database Engineering, and Python Backend roles across India and Remote.
 
-The engine automates discovery, dynamic recruitment source evaluation, eligibility filtering, candidate rate limiting, ATS application submission, and personalized recruiter outreach while strictly adhering to candidate truth, Markdown operational protocols, and safety boundaries.
+The engine operates on a **Pure AI Agent Architecture** (Zero Hardcoded Scraping Scripts). It automates candidate discovery, ATS application submission, personalized recruiter outreach, intent-driven conversational classification, and referrer circle-back re-engagement, strictly adhering to candidate truth, Markdown operational protocols, and database integrity triggers.
 
 ---
 
-## Key Features
+## Unified 8-Topic Architecture
 
-- **Multi-Platform Application**: Native automation for Naukri, Instahyre, Direct Enterprise ATS Portals (Greenhouse, Lever, SmartRecruiters, Workday, Keka, Oracle Cloud HCM, iCIMS), and LinkedIn manual execution queue.
-- **Dynamic Job-Source Discovery Engine**: Persistent tracking and periodic evaluation of recruitment sources (Naukri, LinkedIn, Instahyre, Cutshort, Wellfound, Hirist, Google Jobs) using a 5-factor scoring model.
-- **Granular Application Lifecycle & Evidentiary Standard**: Distinct states (`discovered`, `shortlisted`, `application_prepared`, `awaiting_user_info`, `awaiting_authorization`, `submitted`, `submission_confirmed`, `rejected_or_closed`, `failed`) requiring verifiable confirmation evidence before marking `submission_confirmed`.
-- **Safe Execution Concurrency & State Locking**: Automated concurrency lock management and stale-lock recovery via `execution_state` table in `career.sqlite`.
-- **Guardian Operational Protocol & Audit Ledger**: Enforces daily caps, action reservations (`INSERT INTO actions`), deduplication, rate limits, and SQLite transaction logging with database trigger enforcement.
-- **Candidate Truth Configuration**: Candidate-agnostic architecture. Uses `job-skill/profile.template.json` as the pristine schema template and `job-skill/profile.json` as the active truth profile.
-- **Queued Job Prefill Protocol**: For portals requiring SSO or visual CAPTCHA, the engine opens dedicated browser tabs, pre-fills all candidate fields and resumes, and presents an actionable queue for 1-click completion.
-- **Ultra-Slim Recruiter Cold Outreach**: Automated high-density cold emails dispatched via official webmail with resume attachments and zero-spam rest gates.
-- **Zero-Emoji Professional Standard**: Strict formatting compliance across all outreach text, connection notes, and database records.
+All operations are organized into 8 distinct operational topics:
 
----
-
-## Prerequisites
-
-- **Operating System**: Windows
-- **Node.js**: v22 or higher (Node 24 recommended)
-- **Database CLI**: SQLite CLI 3.54.1 (64-bit) for inspection and administration
-- **Browser**: Brave Browser automatically launched and managed via Playwright MCP using persistent profile (`PlaywrightProfile`)
+1. **Topic 1: Job Boards**: Native applications across high-speed platforms (Naukri: 35/day, LinkedIn Easy Apply: 25/day, Indeed: 15/day).
+2. **Topic 2: ATS Portals**: Direct corporate ATS platforms (Ashby, Greenhouse, Lever, Workable, SmartRecruiters, Workday) and external job links (40/day).
+3. **Topic 3: Post-Based Job Mail**: Targeted email applications sent directly to recruiters from live hiring posts (No Limit).
+4. **Topic 4: HR Cold Mail**: Proactive high-density cold emails sent to HR and Talent Acquisition leads via Outlook Webmail (No Limit).
+5. **Topic 5: Connect People**: High-leverage LinkedIn connection requests sent to senior engineering decision-makers (Senior, Lead, Manager, Director, Head, Principal) using the mandatory `titleFreeText` filter (No Limit).
+6. **Topic 6: Inbound Communications (Top Priority Always)**: Sweeps active LinkedIn message drawers, incoming connection requests with notes, and Outlook Webmail inbox. Answers all pending recruiter inquiries, screening questions, and referral follow-ups before any outbound action is taken (No Limit).
+7. **Topic 7: New Connection Outreach Dispatch**: Dedicated outbound capabilities notes dispatched to newly connected LinkedIn members from the database boundary (No Limit).
+8. **Topic 8: Circle Back**: Continuous monitoring and re-engagement of contacts who explicitly agreed to refer the candidate, auditing company career pages without visiting LinkedIn profiles during periodic background sweeps.
 
 ---
 
-## Quick Start
+## User Invocation Commands
+
+The engine is triggered using 5 grouped conversational commands:
+
+| Command | Operational Topics Executed | Scope & Purpose |
+| :--- | :--- | :--- |
+| `Handle inbound communications` | **Topic 6** | Sweeps and handles all incoming messages, chats, connection notes, and recruiter emails across LinkedIn and Outlook Webmail. Top priority always. |
+| `run job apply` | **Topic 1 & Topic 2** | Job Boards (Naukri, LinkedIn Easy Apply, Indeed) + Direct ATS Portals & external redirect links. |
+| `run connet` (or `run connect`) | **Topic 5** | LinkedIn connection requests to senior engineering decision-makers with `titleFreeText` filter. |
+| `run dispath messages and email` | **Topic 7, Topic 3 & Topic 4** | Intro notes to newly connected LinkedIn members from DB boundary + Targeted job posting emails & HR cold emails via Outlook. |
+| `circle back` | **Topic 8** | Willing referrers monitoring on company career pages; checks for fresh 0–6 yr openings without touching LinkedIn profiles. |
+| `complete all topic` (or `run all`) | **All Topics (6 -> 1 -> 2 -> 5 -> 7 -> 3 -> 4 -> 8)** | Sequentially runs the complete job search and outreach lifecycle. |
+| `status` | **Monitoring** | Reports daily action counts, circle back referrers, active queues, and system state. |
+
+---
+
+## Quick Start (3 Standard Commands)
+
+All routine tasks are unified into 3 simple npm scripts:
 
 ### 1. Initialize the Environment
-
-Run the initialization script from the root of the workspace:
-
-```cmd
-init.cmd
+```bash
+npm run init
 ```
-*(or via npm: `npm run init`)*
+*(or run `./init.sh` directly)*
 
-This script automatically:
-1. Validates the Node.js runtime.
-2. Ensures the `job-skill\data\` directory exists.
-3. Bootstraps `job-skill\data\career.sqlite` from `job-skill\schema.sql` if no database exists.
-4. Ensures candidate profile (`job-skill\profile.json`) is populated.
-5. Verifies the master CV PDF exists.
+Validates Node.js v22+, `sqlite3` CLI, Brave Browser, ensures directory structures exist, bootstraps `job-skill/data/career.sqlite` from `job-skill/schema.sql`, verifies candidate profile and CV, and generates local gitignored `mcp_config.json`.
 
-### 2. Candidate Onboarding & Configuration
-
-To configure the engine for a new candidate or adjust profile facts:
-
-1. Copy `job-skill/profile.template.json` to `job-skill/profile.json` (if setting up fresh).
-2. Populate the required truth sections:
-   - **Identity & Contact**: Full Name, Email, Phone, Location, LinkedIn URL.
-   - **Work Facts**: Total experience years (2.5 Yrs), Current CTC, Expected CTC range, Notice period, Current Employer.
-   - **Target Roles**: Primary role hierarchy (Data Engineer > Database Engineer > Python Developer).
-   - **Technical Skills**: Core technical stack and database/ETL specializations.
-   - **Location Preferences**: Primary South hubs (Hyderabad, Bengaluru, Chennai, Remote) and relocation parameters.
-   - **CV File**: Path to active PDF resume in `career-ops/`.
-3. Alternatively, ask the AI agent in chat to configure or update candidate parameters, and the agent will update `profile.json`, `career.sqlite` answers, and `AGENTS.md` synchronously.
-
-### 3. Pure AI Agent Autonomous Execution
-
-The system operates on a **Pure AI Agent Architecture** (Zero Script-Based Automation):
-- **Candidate Truth & Inputs**: `job-skill/profile.json`, `career-ops/Ajay_Patro_CV.pdf`, and Markdown operational policies.
-- **AI Agent (The Worker)**: Evaluates pages dynamically, formulates queries, judges vacancy fit against Ajay's 2.5 yrs experience truth, navigates ATS forms, and drafts communications. No hardcoded scrapers or decision scripts.
-- **Persistent Memory**: `job-skill/data/career.sqlite` records all discovered vacancies, investigated companies, evaluated sources, and application actions using native `sqlite3.exe`.
-
-To execute an autonomous mission outside the interactive chat session, the agent CLI (OpenAI Codex CLI) is invoked directly:
-
-```cmd
-codex exec --dangerously-bypass-approvals-and-sandbox -C C:\job-search - < mission.txt
+### 2. Compile CV Variants
+```bash
+npm run cv:build
 ```
+Compiles ATS-optimized PDF resume variants from `job-skill/cv/master.tex` using `pdflatex`:
+- Master Baseline CV: `job-skill/cv/Ajay_Patro_CV.pdf`
+- Data Engineer Variant: `job-skill/cv/variants/Ajay_Patro_Data_Engineer.pdf`
+- Database Engineer Variant: `job-skill/cv/variants/Ajay_Patro_Database_Engineer.pdf`
+- Python Backend Developer Variant: `job-skill/cv/variants/Ajay_Patro_Python_Backend.pdf`
 
-### 4. Run the Validation Test Suite
-
-To verify database schema, triggers, and qualification gate integrity:
-
-```powershell
-powershell -ExecutionPolicy Bypass -File "job-skill\test_validation.ps1"
+### 3. Run Validation Suite
+```bash
+npm run validate
 ```
+*(or run `bash ./job-skill/test_validation.sh` directly)*
+
+Executes the automated 16-point test suite verifying SQLite CLI availability, database integrity triggers (no-delete, company blocklist), unique deduplication keys, 5-factor source scoring, granular status transitions, and state locking.
 
 ---
 
@@ -88,55 +73,49 @@ powershell -ExecutionPolicy Bypass -File "job-skill\test_validation.ps1"
 
 ```text
 job-search/
-├── .agents/                    # Agent skill definitions and metadata
+├── .agents/                    # Agent skill definitions (.agents/skills/job-skill -> job-skill/)
+├── .gitattributes              # Cross-platform line-ending rules
 ├── .gitignore                  # Git exclusion rules (databases, logs, build artifacts)
-├── AGENTS.md                   # Operational rules, candidate truth, and safety guardrails
-├── career-ops/                 # Candidate resume and career assets
-│   └── Ajay_Patro_CV.pdf       # Active master CV
-├── init.cmd                    # One-command project initializer and environment validator
-├── package.json                # Project script shortcuts
+├── AGENTS.md                   # Authoritative operational rules, candidate truth, and guardrails
+├── init.sh                     # Linux/macOS initializer and environment validator
+├── package.json                # 3 unified script shortcuts (init, cv:build, validate)
 ├── README.md                   # Complete project documentation
-└── job-skill/                  # Core automation engine
-    ├── boards.md               # Dynamic sources catalog and platform-specific guidelines
-    ├── cv/                     # LaTeX CV source templates (master.tex)
+└── job-skill/                  # Core automation engine & candidate truth
+    ├── cv/                     # LaTeX CV source, active master PDF, variants & playbooks
+    │   ├── Ajay_Patro_CV.pdf   # Active master CV
+    │   ├── master.tex          # ATS-friendly LaTeX source
+    │   ├── build_variants.py   # Compiles tailored resume variants
+    │   ├── variants/           # Tailored PDFs (Data Eng, Database Eng, Python Backend)
+    │   ├── playbooks/          # LinkedIn & Naukri career playbooks
+    │   └── out/                # Build output directory
     ├── data/
     │   └── career.sqlite       # Authoritative SQLite production database
+    ├── discovery/
+    │   └── signatures.json     # Role search query signatures & keyword combinations
     ├── migrations/             # Database migrations (001_dynamic_sources_and_execution.sql)
-    ├── pillars.md              # 5 Workflow pillars: Connect, First Message, Reply, Apply, Track
+    ├── boards.md               # Dynamic sources catalog and platform-specific guidelines
+    ├── mcp-config-snippet.json # Playwright MCP configuration template
+    ├── pillars.md              # Workflow execution playbooks
     ├── profile.json            # Active candidate truth profile & messaging templates
     ├── profile.template.json   # Pristine candidate profile schema template
     ├── schema.sql              # Complete SQLite database schema & triggers
     ├── SKILL.md                # Agent instruction set and execution procedures
-    └── test_validation.ps1     # 16-point automated test validation suite
+    └── test_validation.sh      # 16-point automated validation test suite
 ```
 
 ---
 
-## Dynamic Source Discovery & Scoring
+## Candidate Truth & Operational Guardrails
 
-Recruitment sources are tracked dynamically in the `sources` table and evaluated along five dimensions:
-- **Relevance (25%)**: Alignment with Data Engineer / Database Engineer / Python Developer roles.
-- **Freshness (20%)**: Recency of job postings.
-- **Accessibility (20%)**: Clean application flow without hostile bot barriers.
-- **Uniqueness (15%)**: Ratio of direct company listings vs re-syndicated posts.
-- **Listing Quality (20%)**: Clear salary bands, required experience brackets, and tech stack details.
-
-Sources are classified into:
-- `promoted`: Top-yield portals (e.g. Naukri.com, score: 90).
-- `active`: Verified platforms (Cutshort, Instahyre, LinkedIn, Wellfound, Hirist, Google Jobs).
-- `deprioritized`: Low-yield or misleading aggregators (e.g. GetMeReferred.com, score: 57).
-
----
-
-## Granular Application Lifecycle & Evidentiary Standard
-
-```text
-discovered -> shortlisted -> application_prepared -> submitted -> submission_confirmed
-                                                  \-> awaiting_user_info (SSO / CAPTCHA)
-                                                  \-> awaiting_authorization (Approval)
-                                                  \-> failed / rejected_or_closed
-```
-
-- **`submission_confirmed`**: Requires explicit verifiable proof in `submission_evidence` (portal confirmation message, confirmation ID, or dashboard listing).
-- **`awaiting_user_info`**: Queued for candidate manual input (SSO login, CAPTCHA).
-- **`awaiting_authorization`**: Queued for candidate review and approval before outreach dispatch.
+- **Candidate Name**: Ajay Kumar Patro
+- **Contact Details**: Phone: +91-7894464335, Email: `ajay789patro@outlook.com`
+- **Workday / SSO Login**: Google SSO (`ajay0patro@gmail.com`)
+- **Experience Truth**: 2.5 Years hands-on experience in PostgreSQL, PostGIS, SQL query optimization, Apache Airflow ETL, and Python backend engineering.
+- **Authorized Experience Bracket**: 0–6 Years (rejects only strictly > 6 years).
+- **Current CTC / Expected CTC**: ₹3.6 LPA / ₹10–13 LPA.
+- **Notice Period**: 30 Days.
+- **Zero-Emoji Professional Standard**: Strict prohibition of emojis across all outreach messages, connection notes, emails, and database records.
+- **Direct Message Dispatch Mode (`approval_mode = 'none'`)**: Outbound messages, referral follow-ups, and connection notes are dispatched directly by the agent upon generation without requiring manual review gates.
+- **Mandatory Historical Inspection**: Every conversation thread is inspected from Turn 1 to the end before formulating any response.
+- **Strict CV De-Duplication**: If `Ajay_Patro_CV.pdf` was already shared anywhere in the previous thread history, it is never re-attached.
+- **Queued Job Prefill Protocol**: All jobs queued for manual candidate completion (`awaiting_user_info`) are actively opened and 100% prefilled by the agent before handoff.

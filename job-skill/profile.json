@@ -8,7 +8,8 @@
     "phone_availability": "After 1:00 PM IST",
     "current_location": "India",
     "linkedin_url": "https://www.linkedin.com/in/ajay-patro-933659190/",
-    "github_url": "https://github.com/ajay098patro"
+    "github_url": "https://github.com/ajay098patro",
+    "date_of_birth": "2001-07-08"
   },
   "work_facts": {
     "total_experience_years": 2.5,
@@ -21,24 +22,27 @@
     "current_company": "Monarch Surveyors & Engineering Consultants Ltd",
     "current_title": "GIS Analyst",
     "willing_to_relocate": true,
-    "work_authorization_india": null,
-    "work_authorization_outside_india": "None currently; open to relocation, the decision rests with the employer"
+    "work_authorization_india": "Citizen (India)",
+    "work_authorization_outside_india": "None currently; open to relocation, the decision rests with the employer",
+    "workday_auth": "Google SSO (ajay0patro@gmail.com)"
   },
   "target_roles": [
     "Data Engineer",
     "Database Engineer",
     "Python Developer",
     "Backend Engineer",
-    "Geospatial Data Engineer",
-    "GIS Engineer"
+    "PostgreSQL Developer",
+    "ETL Developer",
+    "SDE Backend",
+    "Data Platform Engineer"
   ],
   "skills_core": [
-    "Data Engineering & ETL Pipelines",
+    "Data Engineering & ETL Pipelines (Airflow, Astronomer, Python)",
     "Database Engineering (PostgreSQL, SQL Query Optimization, Indexing, Schema Design)",
-    "Python Backend Development (FastAPI, Django, REST APIs)",
-    "Apache Airflow & Automated Pipelines",
-    "PostgreSQL / PostGIS",
-    "GeoServer & Spatial Systems"
+    "Python Backend Development (FastAPI, REST APIs, Microservices)",
+    "Enterprise Authentication & Authorization (OAuth2, OIDC, Keycloak, OpenFGA, APISIX, IAP)",
+    "Database Administration & Reliability (pgBackRest PITR, Docker, Linux)",
+    "PostgreSQL / PostGIS & Spatial Schemas"
   ],
   "skills_technical": {
     "languages": [
@@ -85,6 +89,9 @@
       "Docker",
       "Docker Compose",
       "Linux",
+      "Apache Airflow (Astronomer)",
+      "Apache APISIX (API Gateway)",
+      "Identity-Aware Proxy (IAP)",
       "IIS",
       "Apache",
       "Tomcat",
@@ -95,7 +102,9 @@
     "backup_and_auth": [
       "pgBackRest (PITR)",
       "Cloudflare R2",
-      "Keycloak/OIDC"
+      "Keycloak (OIDC / OAuth2)",
+      "OpenFGA (Fine-Grained Authorization / Zanzibar)",
+      "Identity Provider (IdP) Integration"
     ]
   },
   "previous_employment": [
@@ -139,32 +148,38 @@
       "name": "ArcGIS Enterprise MOOC",
       "institution": "Esri",
       "dates": "2026 -- Present"
+    },
+    {
+      "name": "Apache Airflow Fundamentals & DAG Authoring",
+      "institution": "Astronomer",
+      "dates": "2026 (In Progress)"
     }
   ],
   "projects": [
     {
-      "title": "Secure Vector-Tile Serving Platform: Martin + APISIX + Keycloak",
+      "title": "Enterprise Vector-Tile Serving & Auth Integration Platform (Martin + APISIX + Keycloak + OpenFGA)",
       "status": "In Progress",
       "tech_stack": [
         "Martin",
         "PostgreSQL/PostGIS",
         "Docker Compose",
-        "Apache APISIX",
-        "Keycloak/OIDC"
+        "Apache APISIX (API Gateway)",
+        "Keycloak (OIDC / OAuth2)",
+        "OpenFGA (Zanzibar Fine-Grained Authorization)",
+        "Identity-Aware Proxy (IAP)"
       ]
     },
     {
-      "title": "End-to-End AI Burn Scar Detection Pipeline",
+      "title": "Automated Spatial Data ETL & Orchestration Pipeline",
       "status": "Ongoing",
       "tech_stack": [
-        "PyTorch",
         "Apache Airflow",
-        "STAC Catalog",
+        "Python",
+        "STAC Catalog API",
+        "PostgreSQL/PostGIS",
         "FastAPI",
-        "PostGIS",
-        "GeoServer",
-        "Rasterio",
-        "GeoPandas"
+        "GeoPandas",
+        "Docker"
       ]
     },
     {
@@ -217,17 +232,8 @@
   },
   "personal_line_max_words": 25,
   "templates": {
-    "_approved_by_user": [
-      "first_message",
-      "second_ask"
-    ],
-    "_draft_needs_user_approval": [
-      "connect_note",
-      "third_message_india_contact",
-      "third_message_outside_india_contact",
-      "follow_up",
-      "recruiter_email"
-    ],
+    "approval_mode": "none",
+    "_note": "Per candidate directive, approval_mode is none (Direct Message Dispatch Mode). All messages, connect notes, and emails are dispatched directly upon generation.",
     "_placeholder_rule": "{personal_line} is the personal sentence followed by a blank line, or removed entirely when there is none.",
     "first_message": "Hi {first_name},\n\n{personal_line}I'm exploring new opportunities at {company}. I have professional experience in GIS implementation, Python/ArcPy automation, PostgreSQL/PostGIS, GeoServer infrastructure, and Keycloak/OIDC-secured services, including deploying a two-node GeoServer setup and implementing database backup and recovery.\n\nGiven my background, would you be open to referring me for a suitable opportunity at {company}? I have attached my CV for your consideration.\n\nBest,\nAjay",
     "second_ask": "Thanks, I'll review the openings and identify a role that aligns with my experience. If I find a suitable position, would you be willing to refer me for that specific role? I can share the job link and my CV to make it easier.",
@@ -235,6 +241,7 @@
     "third_message_india_contact": "Thank you, {first_name}. Here are the roles at {company} in India that match my background:\n{india_roles}\nI'll send my CV with whichever one you can refer me for.",
     "third_message_outside_india_contact": "Thank you, {first_name}. Based on my profile, would it be possible for me to be considered for a role at your office in {contact_location}? I'm currently in India and don't hold a work visa for {contact_country}, so that would be your call, and I'm happy to go with whatever is feasible.\n{company} roles in {contact_location}:\n{local_roles}\nIf that isn't workable, these are the roles in India:\n{india_roles}\nI'll send my CV with whichever one you can refer me for.",
     "follow_up": "Hi {first_name}, a gentle follow-up on my earlier note. If there is a suitable opening at {company}, I would be grateful for a referral, and I am happy to send my CV. Thank you either way.",
+    "circle_back_bridge": "thanks {first_name}. is it ok if I circle back to you? I will keep an eye on open roles, and if anything relevant comes up that matches my profile, I'll reach back out to you for a referral if that works for you.",
     "recruiter_email_subject": "Resume: Geospatial & Python Backend Engineer - Ajay Patro",
     "recruiter_email": "Dear Hiring Team,\n\nI am writing regarding engineering opportunities with your team.\n\nQuick overview of my relevant experience:\n- PostgreSQL & PostGIS: 2.5+ years hands-on experience in spatial schema design, GiST indexing, and query optimization.\n- Python Backend: Automated ETL pipelines (GDAL, Geopandas) and REST APIs.\n\nI have attached my CV (Ajay_Patro_CV.pdf) for your review. I would welcome the opportunity to connect and discuss how my spatial backend background can contribute to your team.\n\nRegards\nAjay Kumar Patro\n+91-7894464335\najay789patro@outlook.com",
     "replies": {
@@ -243,7 +250,8 @@
       "ctc": "Hi {first_name}, my current CTC is 3.6 LPA and my expected CTC is 10-13 LPA.",
       "location": "Hi {first_name}, I am primarily targeting Hyderabad, Bengaluru, Chennai, and Remote/Hybrid, and open to evaluating other locations based on role scope and compensation structure.",
       "cv_already_shared": "Hi {first_name}, as shared earlier in our conversation, my CV is attached above. Please let me know if you need any additional details.",
-      "cv_attach": "Hi {first_name}, I have attached my resume (Ajay_Patro_CV.pdf) for your review. Looking forward to hearing your thoughts."
+      "cv_attach": "Hi {first_name}, I have attached my resume (Ajay_Patro_CV.pdf) for your review. Looking forward to hearing your thoughts.",
+      "circle_back": "thanks {first_name}. is it ok if I circle back to you? I will keep an eye on open roles, and if anything relevant comes up that matches my profile, I'll reach back out to you for a referral if that works for you."
     }
   }
 }

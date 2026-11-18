@@ -6,11 +6,11 @@
         "-y",
         "@playwright/mcp@0.0.83",
         "--browser=chromium",
-        "--executable-path=C:\\Program Files\\BraveSoftware\\Brave-Browser\\Application\\brave.exe",
-        "--user-data-dir=C:\\Users\\Ajay_lap\\AppData\\Local\\BraveSoftware\\Brave-Browser\\PlaywrightProfile",
+        "--executable-path=/usr/bin/brave-browser",
+        "--user-data-dir=/home/ajay07/.config/BraveSoftware/Brave-Browser/PlaywrightProfile",
         "--no-sandbox",
         "--allow-unrestricted-file-access",
-        "--output-dir=c:\\job-search\\_pw-output"
+        "--output-dir=/mnt/master/projects/job-search/_pw-output"
       ]
     }
   }

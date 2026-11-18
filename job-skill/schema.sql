@@ -3,11 +3,13 @@ PRAGMA foreign_keys = ON;
 
 CREATE TABLE IF NOT EXISTS settings (key TEXT PRIMARY KEY, value TEXT NOT NULL);
 INSERT OR IGNORE INTO settings(key, value) VALUES
- ('paused','0'), ('cooldown_until',''), ('approval_mode','all'),
- ('fit_threshold','60'), ('apply_outside_india','0'), ('mail_account',''),
- ('cap_connect','200'), ('cap_message','200'), ('cap_apply_naukri','9999'),
- ('cap_apply_linkedin','9999'), ('cap_apply_instahyre','9999'),
- ('cap_apply_portal','9999'), ('cap_email','40');
+ ('paused','0'), ('cooldown_until',''), ('approval_mode','none'),
+ ('fit_threshold','50'), ('apply_outside_india','0'), ('mail_account',''),
+ ('cap_connect','9999'), ('cap_message','9999'), ('cap_apply_naukri','35'),
+ ('cap_apply_linkedin','25'), ('cap_apply_instahyre','15'),
+ ('cap_apply_portal','40'), ('cap_apply_indeed','15'), ('cap_apply_iimjobs','10'),
+ ('cap_apply_hirist','10'), ('cap_apply_foundit','10'), ('cap_apply_shine','10'),
+ ('cap_apply_wellfound','10'), ('cap_email','9999');
 
 CREATE TABLE IF NOT EXISTS companies (
   id INTEGER PRIMARY KEY,

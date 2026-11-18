@@ -4,7 +4,9 @@
   "description": "Autonomous multi-platform job application and recruitment outreach pipeline",
   "private": true,
   "scripts": {
-    "init": "init.cmd"
+    "init": "bash ./init.sh",
+    "cv:build": "python3 job-skill/cv/build_variants.py",
+    "validate": "bash ./job-skill/test_validation.sh"
   },
   "keywords": [
     "job-search",

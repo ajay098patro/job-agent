@@ -19,7 +19,15 @@
 \usepackage[english]{babel}
 \usepackage{tabularx}
 \input{glyphtounicode}
-\usepackage{fontawesome5}
+\IfFileExists{fontawesome5.sty}{
+  \usepackage{fontawesome5}
+}{
+  \providecommand{\faPhone}{}
+  \providecommand{\faEnvelope}{}
+  \providecommand{\faLinkedin}{}
+  \providecommand{\faGithub}{}
+  \providecommand{\faAward}{}
+}
 \usepackage{lmodern}
 
 %----------FONT OPTIONS----------
@@ -113,7 +121,7 @@
     \faEnvelope\ \href{mailto:ajay789patro@outlook.com}{ajay789patro@outlook.com} \quad | \quad
     \faLinkedin\ \href{https://www.linkedin.com/in/ajay-patro-933659190/}{linkedin} \quad | \quad
     \faGithub\ \href{https://github.com/ajay098patro}{github.com/ajay098patro} \\ \vspace{2pt}
-    GIS Backend \& Geospatial Data Engineer \quad | \quad PostGIS, Python, GeoServer, Keycloak
+    GIS Backend \& Geospatial Data Engineer \quad | \quad PostGIS, Python, Airflow, Keycloak
 \end{center}
 \vspace{-16pt}
 
@@ -123,15 +131,11 @@
  \begin{itemize}[leftmargin=0.15in, label={}]
     \small{\item{
      \textbf{Languages:}{ Python, SQL, JavaScript, Bash} \\
-     \textbf{Frameworks:}{ Django, FastAPI} \\
+     \textbf{Frameworks:}{ FastAPI, Django} \\
      \textbf{Databases:}{ PostgreSQL/PostGIS, MySQL, SQLite} \\
-     \textbf{Database Engineering \& ETL:}{ Spatial SQL, Query Optimization, Spatial ETL, Indexing, Schema Design} \\
-     \textbf{GIS:}{ \\
-        \hspace{1em}\textbf{Tools:}{ ArcGIS Pro, ArcMap, QGIS, PyQGIS, ArcPy, GDAL/OGR, Orfeo ToolBox, Geopandas, Google Earth Engine, PDAL}\\
-        \hspace{1em}\textbf{Services:}{ GeoServer, Martin, pg\_tileserv, TiTiler}
-     } \\
-     \textbf{Infrastructure \& Tools:}{ Docker, Docker Compose, Linux, IIS, Apache, Tomcat, Nginx, Git, GitHub} \\
-     \textbf{Backup \& Auth:}{ pgBackRest (PITR), Cloudflare R2, Keycloak/OIDC}
+     \textbf{Data Engineering \& ETL:}{ Apache Airflow, Spatial SQL, Query Optimization, ETL Pipelines, Indexing, Schema Design} \\
+     \textbf{Enterprise Auth \& Services:}{ OAuth2/OIDC, Keycloak, Apache APISIX (API Gateway), OpenFGA, IAP, GeoServer, Martin} \\
+     \textbf{Infrastructure \& Tools:}{ Docker, Docker Compose, Linux, pgBackRest (PITR), Cloudflare R2, Git, GitHub, Nginx}
     }}
  \end{itemize}
 
@@ -181,20 +185,20 @@
 \section{Projects} 
 \vspace{-10pt}
 \resumeProjectHeading
-{\textbf{Secure Vector-Tile Serving Platform: Martin + APISIX + Keycloak (In Progress)}}{}
+{\textbf{Enterprise Vector-Tile Serving \& Auth Integration Platform (In Progress)}}{}
 \resumeItemListStart
-\resumeItem{\textbf{Tech Stack:}\textit{ Martin, PostgreSQL/PostGIS, Docker Compose, Apache APISIX, Keycloak/OIDC}}
-\resumeItem{Building a containerized service that serves vector tiles from \textbf{PostGIS} through \textbf{Martin}, with \textbf{Apache APISIX} enforcing \textbf{Keycloak}-based role and resource authorization before requests reach the tile server.}
-\resumeItem{Designing cached authorization decisions to keep per-request validation fast, and working out how cached tiles and decisions should stay correct when data or roles change.}
+\resumeItem{\textbf{Tech Stack:}\textit{ Martin, PostgreSQL/PostGIS, Docker Compose, Apache APISIX, Keycloak (OIDC/OAuth2), OpenFGA}}
+\resumeItem{Building a containerized service that serves vector tiles from \textbf{PostGIS} through \textbf{Martin}, with \textbf{Apache APISIX} enforcing \textbf{Keycloak} and \textbf{OpenFGA} fine-grained authorization before requests reach upstream services.}
+\resumeItem{Designing cached authorization decisions and sub-millisecond route matching to maintain high throughput and low-latency API verification.}
 \resumeItemListEnd
 
 \resumeProjectHeading 
-{\textbf{End-to-End AI Burn Scar Detection Pipeline (Ongoing)}}{} 
+{\textbf{Automated Spatial Data ETL \& Ingestion Pipeline (Ongoing)}}{} 
 \resumeItemListStart 
-\resumeItem{\textbf{Tech Stack:}\textit{ PyTorch, Apache Airflow, STAC Catalog, FastAPI, PostGIS, GeoServer, Rasterio, GeoPandas}} 
-\resumeItem{Developed an automated pipeline to ingest Sentinel-2 imagery via \href{https://dataspace.copernicus.eu/}{CDSE's} \textbf{STAC API} to detect wildfire burn scars using the \href{https://huggingface.co/ibm-nasa-geospatial/Prithvi-EO-2.0-300M-TL}{HuggingFace Model: ibm-nasa-geospatial Prithvi EO-2.0} Model.} 
-\resumeItem{Orchestrated end-to-end \textbf{ETL} workflows with Apache Airflow for preprocessing, inference, and spatial data loading into \textbf{PostGIS}.} 
-\resumeItem{Generated STAC-compliant metadata and published GIS-ready spatial outputs via \textbf{GeoServer}, exposing them through \textbf{FastAPI} as REST API endpoints for downstream analytics and visualization.} 
+\resumeItem{\textbf{Tech Stack:}\textit{ Apache Airflow, Python, STAC Catalog API, FastAPI, PostgreSQL/PostGIS, GeoPandas, Docker}} 
+\resumeItem{Engineered an automated batch ETL pipeline to query and ingest satellite imagery via \href{https://dataspace.copernicus.eu/}{CDSE's} \textbf{STAC API}, automating extraction, band indexing, and spatial coordinate transformations.} 
+\resumeItem{Orchestrated end-to-end \textbf{ETL} DAGs with \textbf{Apache Airflow} for automated preprocessing, spatial validation, and loading into \textbf{PostgreSQL/PostGIS}.} 
+\resumeItem{Built \textbf{FastAPI} REST endpoints to expose processed spatial data layers and metadata catalogs for downstream analytics and web dashboards.} 
 \resumeItemListEnd 
 
 \resumeProjectHeading 
@@ -251,6 +255,9 @@
 
 \item {\textbf{ArcGIS Enterprise MOOC} \hfill \\
       \hspace{1em}{Esri} \hfill 2026 -- Present}
+
+\item {\textbf{Apache Airflow Fundamentals \& DAG Authoring} \hfill \\
+      \hspace{1em}{Astronomer} \hfill 2026 (In Progress)}
 
 \end{itemize}
 

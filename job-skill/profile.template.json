@@ -53,7 +53,7 @@
   ],
   "cv": {
     "master_tex": "job-skill/cv/master.tex",
-    "existing_pdf": "career-ops/resume.pdf",
+    "existing_pdf": "cv/resume.pdf",
     "output_dir": "job-skill/cv/out",
     "output_filename": "CV.pdf"
   },

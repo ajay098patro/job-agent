@@ -35,17 +35,15 @@ Sources are re-evaluated every 14 days or immediately following an audit failure
 - **Role in Engine**: Primary high-volume Indian tech portal for Data Engineering, Python Backend, and Geospatial systems.
 - **Search Parameters**: Target roles (Data Engineer, Database Engineer, Python Developer), 2-3 years experience, Hyderabad / Bengaluru / Chennai / Remote.
 - **Application Execution**: Process matching openings. For 1-click apply, verify submission. For redirect links, resolve company ATS.
-- **Logging**: Record `apply_naukri` in `actions` against daily cap (30/day).
+- **Logging**: Record `apply_naukri` in `actions` against daily cap (35/day).
 
-### LinkedIn (linkedin.com) — [Active / Manual Queue, Composite: 88]
-- **Role in Engine**: High-signal senior listings, target company discovery, and direct decision-maker identification.
-- **Safety Policy (Strict Manual-Queue Boundary)**: To prevent account restrictions, automated clicking of connection requests and messaging is prohibited.
-- **Workflow**:
-  - Search senior leaders (`&titleFreeText=Senior%20OR%20Lead%20OR%20Manager%20OR%20Director%20OR%20Head%20OR%20Principal`).
-  - Queue contacts in `contacts` table (`stage = 'discovered'`).
-  - Draft personalized outreach in `messages` table (`status = 'draft'`).
-  - Present drafted connections and messages in the End-of-Run report for candidate one-click manual execution.
-  - Read-only inbox polling tracks manual responses.
+### LinkedIn (linkedin.com) — [Promoted, Composite: 95]
+- **Role in Engine**: High-signal senior listings, Easy Apply openings (25/day), external ATS portal redirect links (40/day), decision-maker connection networking, and Topic 8 Circle Back re-engagement.
+- **Direct Dispatch & Compliance Protocol**:
+  - Direct message dispatch mode (`approval_mode = 'none'`) directly connects and messages senior engineering leaders via Playwright MCP using human-like delays.
+  - Mandatory Seniority Filter: ALWAYS include `&titleFreeText=Senior%20OR%20Lead%20OR%20Manager%20OR%20Director%20OR%20Head%20OR%20Principal`.
+  - Inbound communications: Top priority sweep handles recruiter chats and referral follow-ups.
+  - Topic 8 Circle Back: Contacts with no immediate openings are starred and audited on external career pages without opening their LinkedIn profiles during periodic background checks.
 
 ### Instahyre (instahyre.com) — [Active, Composite: 83]
 - **Role in Engine**: Premium curated Indian tech opportunities for Python backend, PostgreSQL, and Data Engineering.
@@ -86,5 +84,36 @@ Sources are re-evaluated every 14 days or immediately following an audit failure
 ## 4. File Upload Protocol
 1. Locate file input or trigger button via `browser_snapshot`.
 2. Click trigger via `browser_click`.
-3. Dispatch `browser_file_upload` with `paths: ["C:/job-search/career-ops/Ajay_Patro_CV.pdf"]` or `cv/Ajay_Patro_CV.pdf`.
+3. Dispatch `browser_file_upload` with the absolute path to `job-skill/cv/Ajay_Patro_CV.pdf` in the active workspace.
 4. Immediately take `browser_snapshot` to confirm attachment success and absence of form validation errors.
+
+---
+
+## 5. Dual-Stack Signature Discovery Matrix (Low Competition, High Signal)
+
+To bypass applicant volume bottlenecks and surface niche openings with non-standard titles (e.g. at Esri, Trimble, or enterprise platform companies), the discovery engine rotates dual-stack search queries defined in `job-skill/discovery/signatures.json`:
+
+1. **Spatial Data Engineering & ETL**:
+   - Signature: `GDAL` + `Airflow` + `Python`
+   - Target Roles: Spatial Data Engineer, Geospatial Data Engineer, Data Pipeline Engineer
+   - Portals: Google Jobs (`"GDAL" "Airflow" "Python"`), LinkedIn Boolean (`("GDAL" OR "GeoPandas") AND "Airflow" AND "Python"`), Naukri skills (`GDAL, Airflow, Python`).
+
+2. **Spatial Database Architecture & Optimization**:
+   - Signature: `PostGIS` + `PostgreSQL` + `Airflow`
+   - Target Roles: Database Engineer, PostgreSQL Developer, Geodatabase Engineer
+   - Portals: Google Jobs (`"PostGIS" "PostgreSQL" "Airflow"`), LinkedIn (`"PostGIS" AND "PostgreSQL" AND ("Airflow" OR "ETL")`).
+
+3. **Backend API & Enterprise IAM Integration**:
+   - Signature: `FastAPI` + `Keycloak` (or `OAuth2` / `OIDC`) + `Python`
+   - Target Roles: Backend Developer, Python Integration Engineer, API Developer
+   - Portals: Google Jobs (`"FastAPI" ("Keycloak" OR "OAuth2" OR "OIDC") "Python"`), LinkedIn (`"FastAPI" AND ("Keycloak" OR "OAuth2" OR "OpenFGA")`).
+
+4. **Database Infrastructure & Reliability (SRE)**:
+   - Signature: `PostgreSQL` + (`pgBackRest` OR `PITR`) + `Linux`
+   - Target Roles: Software Reliability Engineer (SRE), Database Administrator, Systems Engineer
+   - Portals: Google Jobs (`"PostgreSQL" ("pgBackRest" OR "PITR") "Linux"`), LinkedIn (`"PostgreSQL" AND ("pgBackRest" OR "point-in-time recovery")`).
+
+5. **Spatial Platform Infrastructure & Services**:
+   - Signature: `GeoServer` + `PostGIS` + `Docker` (or `Martin`)
+   - Target Roles: GIS Platform Engineer, Geospatial Software Engineer, Product Engineer
+   - Portals: Google Jobs (`("GeoServer" OR "Martin") "PostGIS" "Docker"`).
